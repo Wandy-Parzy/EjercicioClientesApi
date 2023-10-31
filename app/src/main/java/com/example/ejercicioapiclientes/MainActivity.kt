@@ -14,9 +14,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.ejemploapi.ui.clientes.ClienteScreen
-import com.example.ejemploapi.ui.clientes.Lista_Cliente_Screen
-import com.example.ejemploapi.ui.clientes.NuevoClienteScreen
+import com.example.ejercicioapiclientes.ui.clientes.ClienteScreen
+import com.example.ejercicioapiclientes.ui.clientes.Lista_Cliente_Screen
+import com.example.ejercicioapiclientes.ui.clientes.NuevoClienteScreen
 import com.example.ejemploapi.ui.navigation.ScreenModule
 import com.example.ejercicioapiclientes.ui.theme.EjercicioApiClientesTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,7 +65,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
-
 

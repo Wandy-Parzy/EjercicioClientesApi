@@ -1,11 +1,13 @@
-package com.example.ejemploapi.ui.clientes
+package com.example.ejercicioapiclientes.ui.clientes
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.twotone.ArrowBack
 import androidx.compose.material.icons.twotone.Check
 import androidx.compose.material.icons.twotone.Close
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -23,7 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.ejercicioapiclientes.ui.clientes.ClientesApiViewModel
+import com.example.ejemploapi.ui.navigation.ScreenModule
+import kotlinx.coroutines.launch
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -38,13 +41,26 @@ fun ClienteScreen(
         viewModel.ClientesbyId(clienteId)
         0
     }
-    /*----------------------------------------Code Start------------------------------------------------------*/
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentSize(Alignment.CenterEnd)
     ) {
+        Icon(
+            imageVector = Icons.TwoTone.ArrowBack,
+            contentDescription = null,
+            tint = Color(0xCD8595FF),
+            modifier = Modifier
+                .align(Alignment.Start)
+                .size(50.dp, 50.dp)
+                .clickable {
+                    scope.launch {
+                        navController.navigate(ScreenModule.Lista_Cliente.route)
+                    }
+                }
+        )
 
         Spacer(Modifier.height(20.dp))
 
@@ -181,26 +197,6 @@ fun ClienteScreen(
                 },
                 onClick = {
                     viewModel.putClientes(clienteId)
-                    onSaveClick()
-                }
-            )
-            Spacer(modifier = Modifier.padding(5.dp))
-            ExtendedFloatingActionButton(
-                modifier = Modifier
-                    .size(60.dp, 50.dp)
-                    .wrapContentSize(Alignment.Center),
-                text = {},
-                containerColor = Color.Red,
-                contentColor = Color.Red,
-                icon = {
-                    Icon(
-                        imageVector = Icons.Filled.Delete,
-                        contentDescription = "delete",
-                        tint = Color.White
-                    )
-                },
-                onClick = {
-                    viewModel.deleteClientes(clienteId)
                     onSaveClick()
                 }
             )

@@ -17,14 +17,14 @@ class ClientesApiRepositoryImp @Inject constructor(
         try {
             emit(Resource.Loading()) //indicar que estamos cargando
 
-            val cliente = clientesApi.getClientes() //descarga los tickets/clietes de internet, se supone quedemora algo
+            val cliente = clientesApi.getClientes() //descarga los tickets de internet, se supone quedemora algo
 
             emit(Resource.Success(cliente)) //indicar que se cargo correctamente
         } catch (e: HttpException) {
             //error general HTTP
             emit(Resource.Error(e.message ?: "Error HTTP GENERAL"))
         } catch (e: IOException) {
-            // verificar tu conexion a internet
+            //debe verificar tu conexion a internet
             emit(Resource.Error(e.message ?: "verificar tu conexion a internet"))
         }
     }
@@ -48,9 +48,9 @@ class ClientesApiRepositoryImp @Inject constructor(
     override suspend fun putClientes(id: Int, clientesDto: ClientesDto) {
         clientesApi.putClientes(id, clientesDto)
     }
-   override suspend fun deleteClientes(id: Int){
+    override suspend fun deleteClientes(id: Int){
         clientesApi.deleteClientes(id)
-   }
+    }
     override suspend fun postClientes(clientesDto: ClientesDto) {
         clientesApi.postClientes(clientesDto)
     }

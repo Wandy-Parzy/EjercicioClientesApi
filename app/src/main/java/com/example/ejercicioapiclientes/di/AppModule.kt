@@ -25,7 +25,7 @@ object AppModule {
     @Provides
     fun providesTePrestoApi(moshi: Moshi): ClientesApi {
         return Retrofit.Builder()
-            .baseUrl("https://wandyservices.azurewebsites.net")
+            .baseUrl("https://wandyservices.azurewebsites.net/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(ClientesApi::class.java)

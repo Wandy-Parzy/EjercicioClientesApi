@@ -1,4 +1,4 @@
-package com.example.ejemploapi.ui.clientes
+package com.example.ejercicioapiclientes.ui.clientes
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -23,7 +23,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.ejemploapi.ui.navigation.ScreenModule
 import com.example.ejercicioapiclientes.data.web.remote.dto.ClientesDto
-import com.example.ejercicioapiclientes.ui.clientes.ClientesApiViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -76,7 +75,6 @@ fun Lista_Cliente_Screen(
 
 }
 
-
 @Composable
 fun ClientesListBody(clientesList: List<ClientesDto>, onClientesClick: (Int) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -121,7 +119,7 @@ fun ClientesRow(clientes: ClientesDto, onClientesClick: (Int) -> Unit) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(5.dp)
-                        .clickable(onClick = { onClientesClick(clientes.clienteId) })
+                        .clickable(onClick = { clientes.clienteId?.let { onClientesClick(it) } })
                 ) {
 
                     Row(
@@ -130,7 +128,7 @@ fun ClientesRow(clientes: ClientesDto, onClientesClick: (Int) -> Unit) {
                             .wrapContentSize(Alignment.CenterEnd)
                     ) {
                         Text(
-                            text = clientes.nombre,
+                            text = clientes.nombres,
                             fontSize = 20.sp,
                             style = MaterialTheme.typography.titleSmall,
                             color = Color(0xC3303030),
@@ -152,7 +150,7 @@ fun ClientesRow(clientes: ClientesDto, onClientesClick: (Int) -> Unit) {
                             modifier = Modifier.weight(8f)
                         )
                         Text(
-                            text = clientes.direccion,
+                            text = clientes.direccion.toString(),
                             fontSize = 20.sp,
                             style = MaterialTheme.typography.titleSmall,
                             color = Color(0xC3303030),
@@ -166,26 +164,6 @@ fun ClientesRow(clientes: ClientesDto, onClientesClick: (Int) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentSize(Alignment.TopCenter)
-        ) {
-            Box {
-                ExtendedFloatingActionButton(
-                    modifier = Modifier
-                        .size(60.dp, 50.dp),
-                    containerColor = Color.Red,
-                    text = { Text("") },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Filled.Delete,
-                            contentDescription = "Delete",
-                            tint = Color.White
-                        )
-                    },
-                    onClick = {
-                        viewModel.deleteClientes(clientes.clienteId)
-                        navController.navigate(ScreenModule.Lista_Cliente.route)
-                    }
-                )
-            }
-        }
+        ) {}
     }
 }

@@ -30,7 +30,7 @@ data class ClientesState(
 class ClientesApiViewModel @Inject constructor(
     private val clientesRepository: ClientesApiRepositoryImp
 
-    ) : ViewModel() {
+) : ViewModel() {
     var nombre by mutableStateOf("")
     var nombreError by mutableStateOf("")
 
@@ -80,9 +80,9 @@ class ClientesApiViewModel @Inject constructor(
                     uiStateClientes.update {
                         it.copy(cliente = result.data)
                     }
-                    nombre = uiStateClientes.value.cliente!!.nombre
+                    nombre = uiStateClientes.value.cliente!!.nombres
                     rnc = uiStateClientes.value.cliente!!.rnc
-                    direccion = uiStateClientes.value.cliente!!.direccion
+                    direccion = uiStateClientes.value.cliente!!.direccion.toString()
                     limiteCredito = uiStateClientes.value.cliente!!.limiteCredito
 
                 }
@@ -101,7 +101,7 @@ class ClientesApiViewModel @Inject constructor(
                     clientesRepository.putClientes(
                         clienteId, ClientesDto(
                             clienteId = clienteId,
-                            nombre = nombre,
+                            nombres = nombre,
                             rnc = rnc,
                             direccion = direccion,
                             limiteCredito = limiteCredito
@@ -159,21 +159,6 @@ class ClientesApiViewModel @Inject constructor(
         return hayError
     }
 
-    fun deleteClientes(id: Int) {
-        viewModelScope.launch {
-            clienteId = id
-            try {
-                if (clienteId != null) {
-                    clientesRepository.deleteClientes(clienteId)
-                } else {
-                    throw NullPointerException("Value is null")
-                }
-            } catch (e: NullPointerException) {
-                e.printStackTrace()
-            }
-        }
-    }
-
     fun postClientes() {
         viewModelScope.launch {
             if (clienteId == null) {
@@ -185,7 +170,7 @@ class ClientesApiViewModel @Inject constructor(
             clientesRepository.postClientes(
                 ClientesDto(
                     clienteId = clienteId,
-                    nombre = nombre,
+                    nombres = nombre,
                     rnc = rnc,
                     direccion = direccion,
                     limiteCredito = limiteCredito

@@ -1,4 +1,4 @@
-package com.example.ejemploapi.ui.clientes
+package com.example.ejercicioapiclientes.ui.clientes
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.ejemploapi.ui.navigation.ScreenModule
-import com.example.ejercicioapiclientes.ui.clientes.ClientesApiViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -31,8 +30,6 @@ fun NuevoClienteScreen(
     onSaveClick: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
-    /*----------------------------------------Code Start------------------------------------------------------*/
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
